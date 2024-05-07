@@ -1,7 +1,7 @@
 import { ListTablesCommand, DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
     UpdateCommand,
-    PutItemCommand,
+    PutCommand,
     DynamoDBDocumentClient,
     ScanCommand,
     DeleteCommand,
@@ -22,7 +22,7 @@ export const fetchTasks = async () => {
     return response;
 };
 
-export const CreateTasks = async ({nameTask, completed}) => {
+export const createTasks = async ({nameTask, completed}) => {
     const uuid = crypto.randomUUID();
 
     const command = new PutCommand({

@@ -7,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { UpdateTaskForm } from './UpdateTaskForm';
 import classnames from "classnames";
 import axios from 'axios';
-import { API_URL } from './utils';
+import { API_URL } from '../utils';
 
 
 export const Task = ({ task, fetchTasks }) => {
