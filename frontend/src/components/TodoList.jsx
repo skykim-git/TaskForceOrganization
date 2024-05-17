@@ -21,7 +21,7 @@ const TodoList = () => {
     const paginatedTodos = reversed.slice(
       currentPage * PAGE_SIZE,
       (currentPage + 1) * PAGE_SIZE,
-    );
+    ).map((todo, index) => ({ ...todo, index: currentPage * PAGE_SIZE + index + 1 }));
     setItems(paginatedTodos);
   }, [currentPage, todos]);
 
@@ -47,19 +47,17 @@ const TodoList = () => {
       return;
     }
 
-    const [removed] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, removed);
+    const startIndex = currentPage * PAGE_SIZE; // Calculate the start index based on current page
+    const newItems = Array.from(items);
+    const [removed] = newItems.splice(result.source.index, 1);
+    newItems.splice(result.destination.index, 0, removed);
 
-    setItems(items);
+    // Update indices dynamically
+    newItems.forEach((item, index) => {
+      item.index = startIndex + index + 1;
+    });
 
-    // const updatedTodoIds = items.map(item => item._id);
-
-    // const updatedTodos = [...todos].sort(
-    //   (a, b) => updatedTodoIds.indexOf(a._id) - updatedTodoIds.indexOf(b._id),
-    // );
-
-    // const reversed = [...updatedTodos].reverse();
-    // dispatch(sendTodos(reversed));
+    setItems(newItems);
   };
 
   return (

@@ -7,6 +7,7 @@ const TodoItem = ({ todo, provided, snapshot }) => {
   const dispatch = useDispatch();
   const [editable, setEditable] = useState(false);
   const [editedTitle, setEditedTitle] = useState(todo.title);
+  const index = todo.index
 
   const deleteTask = _id => {
     dispatch(deleteTodo(_id));
@@ -69,7 +70,7 @@ const TodoItem = ({ todo, provided, snapshot }) => {
           />
         ) : (
           <span className={todo.completed ? 'checked' : 'none'}>
-            {todo.title}
+            {String(todo.index) + ": " + todo.title}
           </span>
         )}
         <div className="btn-wrapper">
